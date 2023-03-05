@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Create Shop</h1>
+
+<form method="POST" action="{{ url_for('main.create_shop') }}">
+	{{ form.csrf_token }}
+    <fieldset>
+        <legend>Please enter your information:</legend>
+
+        {{ form.shop_name.label }}
+        {{ form.shop_name }}
+        <ul>
+            {% for error in form.shop_name.errors %}
+                    <li class="error">{{ error }}</li>
+            {% endfor %}
+        </ul>
+
+            {{ form.city.label }}
+            {{ form.city }}
+        <ul>
+            {% for error in form.city.errors %}
+                    <li class="error">{{ error }}</li>
+            {% endfor %}
+        </ul>
+
+            {{ form.submit }}
+    </fieldset>
+</form>
+
+
+{% endblock %}

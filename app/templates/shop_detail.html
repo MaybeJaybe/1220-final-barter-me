@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Shop - {{ shop.shop_name }}</h1>
+
+<strong>City:</strong> {{ shop.city }}
+<p><strong>{{ shop.created_by.username }} owns this shop</strong></p>
+
+<h2>Items</h2>
+
+<div class="items">
+    {% for item in shop.items %}
+    <div class="item-details">
+        <a href="/item/{{ item.id }}"><img src="{{ item.photo_url }}" alt="{{ item.item_name }}" width="200px">
+        <p><strong>{{ item.item_name }}</strong></p></a>
+        <p><strong>Price: ${{ item.price }}</strong></p>
+        <form method="POST" action="{{ url_for('main.add_to_cart', item_id=item.id) }}">
+            {{ form.csrf_token }}
+            <button type="submit">Add to Cart</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Edit Shop</h2>
+
+<form method="POST" action="{{ url_for('main.shop_detail', shop_id=shop.id) }}">
+    {{ form.csrf_token }}
+    <fieldset>
+        
+        <legend>Please enter your information:</legend>
+
+        {{ form.shop_name.label }}
+        {{ form.shop_name }}
+
+        {{ form.city.label }}
+        {{ form.city }}
+
+        {{ form.submit }}
+    </fieldset>
+</form>
+
+{% endblock %}

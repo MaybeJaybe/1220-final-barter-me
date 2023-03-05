@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Barter Me</title>
+
+		<link rel="stylesheet" href="../static/style.css">		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<div id="content">
+			{% for message in get_flashed_messages() %}
+				<p>{{ message }}</p>
+			{% endfor %}
+
+			{% if current_user.is_authenticated %}
+				<p>{{ current_user.username }}</p>
+			{% endif %}
+
+			<nav>
+				<a href="/">Home</a>
+				<div>
+					{% if current_user.is_authenticated %}
+						<a href="/create_shop">Create Storefront</a>
+						<a href="/new_item">New Listing</a>
+						<a href="/cart">Cart</a>
+						<a href="/logout">Logout</a>
+					{% else %}
+						<a href="/signup">Sign Up</a>
+						<a href="/login">Login</a>
+					{% endif %}
+				</div>
+			</nav>
+			{% block content %}{% endblock %}
+		</div>
+	</body>
+</html>
