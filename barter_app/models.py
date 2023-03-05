@@ -1,7 +1,7 @@
 from sqlalchemy_utils import URLType
 from flask_login import UserMixin
-from app.utils import FormEnum
-from app.extensions import db
+from barter_app.utils import FormEnum
+from barter_app.extensions import db
 
 class ListingCategory(FormEnum):
 	AUTO = 'Auto'

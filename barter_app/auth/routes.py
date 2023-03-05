@@ -1,12 +1,12 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from datetime import date, datetime
-from app.models import ShopContainer, ListedItem, User
-from app.auth.forms import SignUpForm, LoginForm
+from barter_app.models import ShopContainer, ListedItem, User
+from barter_app.auth.forms import SignUpForm, LoginForm
 
 import flask_login
 from flask_login import login_user, logout_user, login_required, current_user
 
-from app.extensions import app, db, bcrypt
+from barter_app.extensions import app, db, bcrypt
 
 auth = Blueprint("auth", __name__)
 

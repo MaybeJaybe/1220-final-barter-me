@@ -3,8 +3,8 @@ from wtforms import StringField, DateField, SelectField, SubmitField, FloatField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, URL, ValidationError
 
-from app.models import ListingCategory, ShopContainer, ListedItem, User
-from app.extensions import bcrypt, app, db
+from barter_app.models import ListingCategory, ShopContainer, ListedItem, User
+from barter_app.extensions import bcrypt, app, db
 
 class SignUpForm(FlaskForm):
 	username = StringField('Username',
