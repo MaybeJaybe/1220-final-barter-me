@@ -14,10 +14,6 @@
 				<p>{{ message }}</p>
 			{% endfor %}
 
-			{% if current_user.is_authenticated %}
-				<p>{{ current_user.username }}</p>
-			{% endif %}
-
 			<nav>
 				<a href="/">Home</a>
 				<div>
@@ -32,6 +28,11 @@
 					{% endif %}
 				</div>
 			</nav>
+
+			{% if current_user.is_authenticated %}
+				<p class="user_profile">{{ current_user.username }}</p>
+			{% endif %}
+
 			{% block content %}{% endblock %}
 		</div>
 	</body>

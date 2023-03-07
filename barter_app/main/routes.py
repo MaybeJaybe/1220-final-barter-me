@@ -88,6 +88,15 @@ def item_detail(item_id):
 	item = ListedItem.query.get(item_id)
 	return render_template('item_detail.html', item=item, form=form)
 
+@main.route('/delete_item/<item_id>', methods=['POST'])
+@login_required
+def delete_item(item_id):
+	item = ListedItem.query.get(item_id)
+	db.session.delete(item)
+	db.session.commit()
+	flash('Item deleted from store')
+	return redirect(url_for(''))
+
 @main.route('/add_to_cart/<item_id>', methods=['POST'])
 @login_required
 def add_to_cart(item_id):

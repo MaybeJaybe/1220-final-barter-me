@@ -11,30 +11,32 @@
 
 <p><strong>Shop:</strong> {{ item.shop.shop_name }}</p>
 
-<h2>Edit Item</h2>
+{% if current_user.is_authenticated and item.created_by.current_user %}
+	<h2>Edit Item</h2>
 
-<form method="POST" action="{{ url_for('main.item_detail', item_id = item.id) }}">
-	{{ form.csrf_token }}
-	<fieldset>
-		<legend>Please enter your information:</legend>
+	<form method="POST" action="{{ url_for('main.item_detail', item_id = item.id) }}">
+		{{ form.csrf_token }}
+		<fieldset>
+			<legend>Please enter your information:</legend>
 
-		{{ form.item_name.label }}
-		{{ form.item_name }}
+			{{ form.item_name.label }}
+			{{ form.item_name }}
 
-		{{ form.price.label }}
-		{{ form.price }}
+			{{ form.price.label }}
+			{{ form.price }}
 
-		{{ form.category.label }}
-		{{ form.category }}
+			{{ form.category.label }}
+			{{ form.category }}
 
-		{{ form.photo_url.label }}
-		{{ form.photo_url }}
+			{{ form.photo_url.label }}
+			{{ form.photo_url }}
 
-		{{ form.shop.label }}
-		{{ form.shop }}
+			{{ form.shop.label }}
+			{{ form.shop }}
 
-		{{ form.submit }}
-	</fieldset>
-</form>
+			{{ form.submit }}
+		</fieldset>
+	</form>
+{% endif %}
 
 {% endblock %}
