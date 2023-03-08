@@ -40,6 +40,7 @@ class TestAuth(unittest.TestCase):
 		}
 		self.app.post('/signup', data=post_data)
 
+		# response = self.app.get('/profile/Test')
 		new_user = User.query.filter_by(username='Test').first()
 		self.assertEqual('Test', new_user.username)
 

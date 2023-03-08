@@ -88,14 +88,14 @@ def item_detail(item_id):
 	item = ListedItem.query.get(item_id)
 	return render_template('item_detail.html', item=item, form=form)
 
-@main.route('/delete_item/<item_id>', methods=['POST'])
+@main.route('/delete_item/<item_id>/<shop_id>', methods=['POST'])
 @login_required
-def delete_item(item_id):
+def delete_item(item_id, shop_id):
 	item = ListedItem.query.get(item_id)
 	db.session.delete(item)
 	db.session.commit()
 	flash('Item deleted from store')
-	return redirect(url_for(''))
+	return redirect(url_for('main.shop_detail', shop_id=item.shop_id))
 
 @main.route('/add_to_cart/<item_id>', methods=['POST'])
 @login_required
@@ -112,3 +112,11 @@ def add_to_cart(item_id):
 def cart():
 	cart = current_user.cart_list
 	return render_template('cart.html', cart=cart)
+
+@main.route('/remove_from_cart/<item_id>', methods=['POST'])
+@login_required
+def remove_from_cart(item_id):
+	item = ListedItem.query.get(item_id)
+	db.session.delete(item)
+	db.session.commit()
+	return redirect(url_for('main.cart', item_id=item_id))

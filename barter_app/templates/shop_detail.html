@@ -22,24 +22,26 @@
     {% endfor %}
 </div>
 
-{% if current_user.is_authenticated and shop.created_by.current_user %}
-    <h2>Edit Shop</h2>
+{% if current_user.is_authenticated %}
+    {% if shop.created_by.username == current_user.username %}
+        <h2>Edit Shop</h2>
 
-    <form method="POST" action="{{ url_for('main.shop_detail', shop_id=shop.id) }}">
-        {{ form.csrf_token }}
-        <fieldset>
-            
-            <legend>Please enter your information:</legend>
+        <form method="POST" action="{{ url_for('main.shop_detail', shop_id=shop.id) }}">
+            {{ form.csrf_token }}
+            <fieldset>
+                
+                <legend>Please enter your information:</legend>
 
-            {{ form.shop_name.label }}
-            {{ form.shop_name }}
+                {{ form.shop_name.label }}
+                {{ form.shop_name }}
 
-            {{ form.city.label }}
-            {{ form.city }}
+                {{ form.city.label }}
+                {{ form.city }}
 
-            {{ form.submit }}
-        </fieldset>
-    </form>
+                {{ form.submit }}
+            </fieldset>
+        </form>
+    {% endif %}
 {% endif %}
 
 {% endblock %}
